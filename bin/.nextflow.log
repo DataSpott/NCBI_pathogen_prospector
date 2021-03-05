@@ -1,0 +1,11 @@
+Jan-20 15:30:03.665 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --assembly_nrs data/test_acc.tsv --api_key 9032af6194e7b92eab44dab40580485c6508
+Jan-20 15:30:03.745 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 20.10.0
+Jan-20 15:30:03.811 [main] DEBUG nextflow.cli.Launcher - Operation aborted
+nextflow.exception.AbortOperationException: Not a valid project name: main.nf
+	at nextflow.scm.AssetManager.resolveName(AssetManager.groovy:256)
+	at nextflow.scm.AssetManager.build(AssetManager.groovy:131)
+	at nextflow.scm.AssetManager.<init>(AssetManager.groovy:109)
+	at nextflow.cli.CmdRun.getScriptFile(CmdRun.groovy:335)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:249)
+	at nextflow.cli.Launcher.run(Launcher.groovy:466)
+	at nextflow.cli.Launcher.main(Launcher.groovy:648)
