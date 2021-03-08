@@ -19,7 +19,7 @@ usage()
   }
 
 res_gene_summariser() {
-    declare -a CARB_GENE_ARRAY="${CARB_GENES_FILE}"
+    declare -a CARB_GENE_ARRAY=$(cat "${CARB_GENES_FILE}")
 
     for FILENAME in "${PWD}"/*.tsv; do
         SIMPLE_NAME=$(basename "${FILENAME}" | sed "s/.tsv//")

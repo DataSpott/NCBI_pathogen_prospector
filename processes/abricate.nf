@@ -19,6 +19,6 @@ process abricate {
       abricate ${dir} --nopath --quiet --mincov 80 --db vfdb >> "\$NEW_NAME".tsv
       abricate ${dir} --nopath --quiet --mincov 80 --db ecoh >> "\$NEW_NAME".tsv
 
-      bash resistance_gene_summariser.sh -i ${carb_gene_list}
+      bash resistance_gene_summariser.sh -i "${carb_gene_list}"
       """
 }
