@@ -23,16 +23,16 @@ res_gene_summariser() {
 
     for FILENAME in "${PWD}"/*.tsv; do
         SIMPLE_NAME=$(basename "${FILENAME}" | sed "s/.tsv//")
-        DATA=$(cat "${FILENAME}" | cut -f 6 | sort | uniq | grep -v "GENE" | tr "\n" ";" | sed "s/;$//")
+        RES_GENES=$(cat "${FILENAME}" | cut -f 6 | sort | uniq | grep -v "GENE" | tr "\n" ";" | sed "s/;$//")
         FOUND_CARBS_ARRAY=()
         for IDX in "${!CARB_GENE_ARRAY[@]}"; do
             if grep -q "${CARB_GENE_ARRAY[${IDX}]}"; then 
                 FOUND_CARBS_ARRAY+=("${CARB_GENE_ARRAY[${IDX}]}")
-            fi <<< $(echo "${DATA}")
+            fi <<< $(echo "${RES_GENES}")
         done <<< $("${CARB_GENE_ARRAY[@]}") #needs to be given as process substitution, because otherwise the process would run in a subshell & it´s results wouldn´t be transferred to the main process -> array wouldn´t get filled
         RESULT_ARRAY=$(echo "${FOUND_CARBS_ARRAY[@]}" | tr " " ";" | tr -d "(" | tr -d ")")
         echo "Assembly,Res_genes,found carbapenemase-genes" > "${SIMPLE_NAME}"_resistance_genes.csv
-        echo "${SIMPLE_NAME},${DATA},${RESULT_ARRAY}" >> "${SIMPLE_NAME}"_resistance_genes.csv
+        echo "${SIMPLE_NAME},${RES_GENES},${RESULT_ARRAY}" >> "${SIMPLE_NAME}"_resistance_genes.csv
         unset FOUND_CARBS_ARRAY
     done
 }
