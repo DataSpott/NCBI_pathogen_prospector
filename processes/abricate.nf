@@ -12,12 +12,10 @@ process abricate {
       tuple val(name), path("*.csv"), emit: abricate_csv_ch
     script:
       """
-      NEW_NAME=\$(basename "${name}" | sed "s/.fasta//")
-
-      abricate ${dir} --nopath --quiet --mincov 80 --db ncbi >> "\$NEW_NAME".tsv
-      abricate ${dir} --nopath --quiet --mincov 80 --db card >> "\$NEW_NAME".tsv
-      abricate ${dir} --nopath --quiet --mincov 80 --db vfdb >> "\$NEW_NAME".tsv
-      abricate ${dir} --nopath --quiet --mincov 80 --db ecoh >> "\$NEW_NAME".tsv
+      abricate ${dir} --nopath --quiet --mincov 80 --db ncbi >> "${name}".tsv
+      abricate ${dir} --nopath --quiet --mincov 80 --db card >> "${name}".tsv
+      abricate ${dir} --nopath --quiet --mincov 80 --db vfdb >> "${name}".tsv
+      abricate ${dir} --nopath --quiet --mincov 80 --db ecoh >> "${name}".tsv
 
       bash resistance_gene_summariser.sh -i "${carb_gene_list}"
       """

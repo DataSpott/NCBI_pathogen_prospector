@@ -84,6 +84,3 @@ workflow {
     
     if (params.biosample_nrs) { biosample_downloader(biosam_access_list) }
 }
-
-//, storeDir: params.output
-//.subscribe { println "${it.text}" }
