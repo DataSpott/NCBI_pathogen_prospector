@@ -5,8 +5,7 @@ process abricate {
       maxRetries 5
 
     input:
-      tuple val(name), path(dir)
-      path(carb_gene_list)
+      tuple val(name), path(dir), path(carb_gene_list)
     output:
       tuple val(name), path("*.tsv"), emit: abricate_tsv_ch
       tuple val(name), path("*.csv"), emit: abricate_csv_ch

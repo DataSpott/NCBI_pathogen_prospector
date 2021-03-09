@@ -55,7 +55,7 @@ if (params.biosample_nrs) {biosam_access_list = Channel
         .map { it -> it[0] }
 }
 
-carbapenemase_genes_file = Channel.value( workflow.projectDir + "/data/carbapenemase_genes.txt")
+carbapenemase_genes_file = Channel.fromPath( workflow.projectDir + "/data/carbapenemase_genes.txt", checkIfExists: true)
 
 
 //xxxxxxxxxxxxxx//
@@ -77,7 +77,7 @@ workflow {
     
     if (params.assembly_nrs) { 
         fasta_downloader(assem_access_list)
-        abricate(fasta_downloader.out.fasta_ch, carbapenemase_genes_file)
+        abricate(fasta_downloader.out.fasta_ch.combine(carbapenemase_genes_file))
         isolate_info_summariser(fasta_downloader.out.info_csv_ch.join(abricate.out.abricate_csv_ch))
         report_parsing(isolate_info_summariser.out.collectFile(name: 'pre_report.csv', keepHeader: true, skip: 1 ))
         }
