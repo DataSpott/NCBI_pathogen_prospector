@@ -27,7 +27,7 @@ path/to/NCBI_pathogen_prospector/main.nf --help
 * create a list of assembly accenssion-numbers & save it to a file (no header, one number per line)
 * hand the list-file to the *assembly_nrs*-flag:
 ```bash
-path/to7NCBI_pathogen_prospector/main.nf --assembly_nrs path/to/assmebly_nr_list.file
+path/to/NCBI_pathogen_prospector/main.nf --assembly_nrs path/to/assmebly_nr_list.file
 ```
 
 * due to limitations in the download-rate from NCBI the maximum amount of processes at the same time is limited to two for the fasta-download-process.
