@@ -33,5 +33,5 @@ path/to/NCBI_pathogen_prospector/main.nf --assembly_nrs path/to/assmebly_nr_list
 * due to limitations in the download-rate from NCBI the maximum amount of processes at the same time is limited to two for the fasta-download-process.
 * If you posses an NCBI API-key you can use the *api_key*-flag to increase the amount of simultaneous fasta-downloads to 5:
 ```bash
-path/to7NCBI_pathogen_prospector/main.nf --assembly_nrs path/to/assmebly_nr_list.file --api_key "your_api_key"
+path/to/NCBI_pathogen_prospector/main.nf --assembly_nrs path/to/assmebly_nr_list.file --api_key "your_api_key"
 ```
