@@ -26,7 +26,7 @@ res_gene_summariser() {
         RES_GENES=$(cat "${FILENAME}" | cut -f 6 | sort | uniq | grep -v "GENE" | tr "\n" ";" | sed "s/;$//")
         FOUND_CARBS_ARRAY=()
         for IDX in "${!CARB_GENE_ARRAY[@]}"; do
-            if grep -q "${CARB_GENE_ARRAY[${IDX}]}"; then 
+            if grep -w -q "${CARB_GENE_ARRAY[${IDX}]}"; then 
                 FOUND_CARBS_ARRAY+=("${CARB_GENE_ARRAY[${IDX}]}")
             fi <<< $(echo "${RES_GENES}")
         done <<< $("${CARB_GENE_ARRAY[@]}") #needs to be given as process substitution, because otherwise the process would run in a subshell & it´s results wouldn´t be transferred to the main process -> array wouldn´t get filled
