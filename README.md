@@ -22,7 +22,7 @@ git clone https://github.com/DataSpott/NCBI_pathogen_prospector.git
 
 * use the following command to show the help-message:
 ```bash
-path/to7NCBI_pathogen_prospector/main.nf --help
+path/to/NCBI_pathogen_prospector/main.nf --help
 ```
 * create a list of assembly accenssion-numbers & save it to a file (no header, one number per line)
 * hand the list-file to the *assembly_nrs*-flag:
