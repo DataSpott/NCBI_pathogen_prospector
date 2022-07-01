@@ -1,5 +1,5 @@
 #!/usr/bin/env nextflow
-nextflow.preview.dsl=2
+nextflow.enable.dsl=2
 
 println "\u001B[32mProfile: $workflow.profile\033[0m"
 println "\033[2mCurrent User: $workflow.userName"
@@ -62,11 +62,11 @@ carbapenemase_genes_file = Channel.fromPath( workflow.projectDir + "/data/carbap
 //***Modules***//
 //xxxxxxxxxxxxxx//
 
-include { abricate } from './processes/abricate'
-include { biosample_downloader} from './processes/biosample_downloader'
-include { fasta_downloader } from './processes/fasta_downloader'
-include { isolate_info_summariser} from './processes/isolate_info_summariser'
-include { report_parsing} from './processes/report_parsing'
+include { abricate_wf } from './workflows/abricate_wf.nf'
+include { biosample_download_wf } from './workflows/file_download_wf.nf'
+include { fasta_download_wf } from './workflows/file_download_wf.nf'
+include { isolate_info_summary_wf} from './/workflows/summary_wf.nf'
+include { report_parsing_wf} from './workflows/summary_wf.nf'
 
 //xxxxxxxxxxxxxx//
 //***main Workflow***//
@@ -76,11 +76,11 @@ workflow {
     if (params.input) {println ">> WIP <<"}
     
     if (params.assembly_nrs) { 
-        fasta_downloader(assem_access_list)
-        abricate(fasta_downloader.out.fasta_ch.combine(carbapenemase_genes_file))
-        isolate_info_summariser(fasta_downloader.out.info_csv_ch.join(abricate.out.abricate_csv_ch))
-        report_parsing(isolate_info_summariser.out.collectFile(name: 'pre_report.csv', keepHeader: true, skip: 1 ))
+        fasta_download_wf(assem_access_list)
+        abricate_wf(fasta_download_wf.out.fasta_ch.combine(carbapenemase_genes_file))
+        isolate_info_summary_wf(fasta_download_wf.out.info_csv_ch.join(abricate_wf.out.abricate_csv_ch))
+        report_parsing_wf(isolate_info_summary_wf.out.info_summary_ch.collectFile(name: 'pre_report.csv', keepHeader: true, skip: 1 ))
         }
     
-    if (params.biosample_nrs) { biosample_downloader(biosam_access_list) }
+    if (params.biosample_nrs) { biosample_download_wf(biosam_access_list) }
 }
