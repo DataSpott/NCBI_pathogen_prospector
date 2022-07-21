@@ -1,5 +1,5 @@
 process fasta_downloader {
-    maxForks = "${params.fork_max}"
+    //maxForks = "${params.fork_max}"
     label 'entrez_downloader'
     publishDir "${params.output}/fasta_files/", mode: 'copy', pattern: '*.fasta'
     errorStrategy 'retry'

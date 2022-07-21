@@ -1,4 +1,4 @@
-include { abricate } from './process/abricate.nf'
+include { abricate } from './processes/abricate.nf'
 
 workflow abricate_wf {
     take: 

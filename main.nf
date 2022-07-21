@@ -7,11 +7,13 @@ println "Workdir location:"
 println "  $workflow.workDir"
 println "CPUs to use: $params.cores"
 println "Output dir: $params.output\u001B[0m"
-if (params.api_key == '' ) { params.fork_max = 2 
-    println "\033[2mNo API-Key given: setting maxForks to 2\u001B[0m"} 
-    else { params.fork_max = 5 
+if (params.api_key == '' ) {
+    params.fork_max = 2 
+    println "\033[2mNo API-Key given: setting maxForks to 2\u001B[0m"
+    } 
+else { params.fork_max = 5 
     println "\033[2mAPI-Key given: setting maxForks to 5\u001B[0m"
-    }
+}
 println ""
 
 // help
