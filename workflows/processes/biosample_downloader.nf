@@ -1,5 +1,5 @@
 process biosample_downloader {
-    //maxForks = "${params.fork_max}"
+    maxForks = "${params.fork_max}"
     label 'entrez_downloader'
     publishDir "${params.output}/biosample_data/", mode: 'copy'
 	input:
